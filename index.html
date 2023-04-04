@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./styles.css">
+</head>
+
+<body>
+    <div class="maincontainer">
+        <h1>Student Management CRUD</h1>
+
+        <form action="">
+            <div class="inputs">
+                <input type="text" name="name" id="name" placeholder="Name" required>
+                <input type="email" name="email" id="email" placeholder="Email" required>
+                <input type="text" name="gpa" id="gpa" placeholder="GPA" required>
+                <input type="number" name="age" id="age" placeholder="Age" required>
+                <input type="text" name="degree" id="degree" placeholder="Degree" required>
+                <input type="submit" value="Add Student" id="changebutton">
+            </div>
+        </form>
+
+        <input type="search" id="searchbox" placeholder="Search By Name,email or degree" onkeyup="searchfunc()">
+
+        <table>
+          <thead>
+            <tr>
+                <th>ID</th>
+                <th>Student Name</th>
+                <th>Email</th>
+                <th>Age</th>
+                <th>GPA</th>
+                <th>Degree
+                </th>
+            </tr>
+          </thead>
+           <tbody>
+         
+           </tbody>
+
+         
+
+        </table>
+    </div>
+
+
+
+
+    <script src="./script.js"></script>
+</body>
+
+</html>
