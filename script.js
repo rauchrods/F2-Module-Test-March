@@ -9,7 +9,6 @@ let global_id;
 formobj.addEventListener("submit", (e) => {
     e.preventDefault();
 
-    
 
     let namedata = document.querySelector("#name").value;
     let emaildata = document.querySelector("#email").value;
@@ -17,14 +16,14 @@ formobj.addEventListener("submit", (e) => {
     let agedata = document.querySelector("#age").value;
     let degreedata = document.querySelector("#degree").value;
 
-    if(document.querySelector("#changebutton").value == "Edit Student"){
+    if (document.querySelector("#changebutton").value == "Edit Student") {
         console.log("this will edit and not add");
         console.log(global_id);
         let index;
 
         for (let i = 0; i < students.length; i++) {
             if (students[i].id == global_id) {
-                index=i;
+                index = i;
                 break;
             }
         }
@@ -38,11 +37,12 @@ formobj.addEventListener("submit", (e) => {
         studentobj.degree = degreedata;
 
         students[index] = studentobj;
-        localStorage.setItem("students",JSON.stringify(students));
+        localStorage.setItem("students", JSON.stringify(students));
 
         updatetableinfo(students);
         alert(`Student with id ${global_id} updated Successfully!`);
         document.querySelector("#changebutton").value = "Add Student";
+        clearinputs();
         console.log(students);
 
         return;
@@ -60,13 +60,14 @@ formobj.addEventListener("submit", (e) => {
     }
     students.push(student);
 
-    localStorage.setItem("students",JSON.stringify(students));
+    localStorage.setItem("students", JSON.stringify(students));
 
     updatetableinfo(students);
 
     alert(`Student with id no ${student.id} succesfully added`);
+    clearinputs();
 
-     console.log(students);
+    console.log(students);
 
 });
 
@@ -122,7 +123,7 @@ function deletestudent(id) {
         new_id++;
 
     }
-    localStorage.setItem("students",JSON.stringify(students));
+    localStorage.setItem("students", JSON.stringify(students));
     updatetableinfo(students);
     console.log(students);
 }
@@ -138,7 +139,7 @@ function editstudent(id) {
     }
 
     document.querySelector("#name").value = student.name;
-    document.querySelector("#email").value = student.email ;
+    document.querySelector("#email").value = student.email;
     document.querySelector("#gpa").value = student.GPA;
     document.querySelector("#age").value = student.age;
     document.querySelector("#degree").value = student.degree;
@@ -146,32 +147,32 @@ function editstudent(id) {
 
     document.querySelector("#changebutton").value = "Edit Student";
 
-     global_id=id;
+    global_id = id;
 
     console.log(global_id);
 
 }
 
-function searchfunc(){
+function searchfunc() {
     let input_search = "";
     input_search = document.querySelector("#searchbox").value.toLowerCase();
 
-  
+
 
     let tr_objects = document.querySelectorAll("tbody>tr");
 
-    tr_objects.forEach((tr_obj)=>{
-          let somarr = tr_obj.querySelectorAll("td");
-          let name =  somarr[1].innerText.toLowerCase();
-          let emailid = somarr[2].innerText.toLowerCase();
-          let degree = somarr[5].innerText.trim().toLowerCase();
+    tr_objects.forEach((tr_obj) => {
+        let somarr = tr_obj.querySelectorAll("td");
+        let name = somarr[1].innerText.toLowerCase();
+        let emailid = somarr[2].innerText.toLowerCase();
+        let degree = somarr[5].innerText.trim().toLowerCase();
 
-          if(name.indexOf(input_search)>-1 || emailid.indexOf(input_search)>-1 || degree.indexOf(input_search)>-1 ){
+        if (name.indexOf(input_search) > -1 || emailid.indexOf(input_search) > -1 || degree.indexOf(input_search) > -1) {
             tr_obj.style.display = "";
-          }
-          else{
+        }
+        else {
             tr_obj.style.display = "none";
-          }
+        }
 
 
     });
@@ -179,10 +180,19 @@ function searchfunc(){
     console.log("hi");
 }
 
-(()=>{
+function clearinputs() {
+    document.querySelector("#name").value = "";
+    document.querySelector("#email").value = "";
+    document.querySelector("#gpa").value = "";
+    document.querySelector("#age").value = "";
+    document.querySelector("#degree").value = "";
+}
 
-    students  = JSON.parse(localStorage.getItem("students")) || [];
-   console.log(students);
+
+(() => {
+
+    students = JSON.parse(localStorage.getItem("students")) || [];
+    console.log(students);
     updatetableinfo(students);
 
 })();
